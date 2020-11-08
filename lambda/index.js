@@ -39,6 +39,7 @@ const GetRemoteDataHandler = {
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
+      .reprompt(outputSpeech)
       .getResponse();
   },
 };

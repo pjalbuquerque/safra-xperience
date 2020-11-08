@@ -19,13 +19,16 @@
           "name": "GetRemoteDataIntent",
           "slots": [],
           "samples": [
-            "hello",
-            "how are you",
-            "say hi world",
-            "say hi",
-            "hi",
-            "say hello world",
-            "say hello"
+            "saldo da conta",
+            "valor da conta",
+            "teste da conta"
+          ]
+        },
+        {
+          "name": "CancelAndStopIntentHandler",
+          "slots": [],
+          "samples": [
+            "sair"
           ]
         },
         {
