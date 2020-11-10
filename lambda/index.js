@@ -73,10 +73,11 @@ const NewAccount = async (data) => {
 
 const InitialIntent = {
   canHandle(handlerInput) {
+    console.log(handlerInput)
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
   },
   handle(handlerInput) {
-
+    console.log("Initial");
     const outputSpeech = Initial();
     console.log(outputSpeech);
 
