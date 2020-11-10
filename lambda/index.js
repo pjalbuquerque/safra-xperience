@@ -39,7 +39,7 @@ const InitialIntent = (data) => {
     '- Acessar conta',
     '- Noticias da manha',
     '- Solicitar abertura de conta'
-  ]
+  ].join(" ")
   await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
     .then(function (response) {
       outputSpeech = response.data.payload
