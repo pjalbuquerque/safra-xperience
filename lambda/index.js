@@ -16,8 +16,7 @@ const auth = async () => {
 
   return await axios({
     method: 'post',
-    url,
-    params: handlerInput,
+    url: url,
     headers
   })
   .then(function (response) {
@@ -50,7 +49,7 @@ const InitialIntent = async (data) => {
 }
 
 const AccountIntent = async (data) => {
-  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
+  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       outputSpeech = response.data.payload
     })
@@ -60,7 +59,7 @@ const AccountIntent = async (data) => {
 }
 
 const NewsIntent = async (data) => {
-  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
+  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       outputSpeech = response.data.payload
     })
@@ -70,7 +69,7 @@ const NewsIntent = async (data) => {
 }
 
 const NewAccountIntent = async (data) => {
-  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
+  await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       outputSpeech = response.data.payload
     })
