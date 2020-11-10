@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable global-require */
 
-const Alexa = require('ask-sdk-core');
+// const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 
 const auth = async () => {
@@ -17,9 +17,11 @@ const auth = async () => {
   return await axios({
     method: 'post',
     url: url,
-    headers
+    headers,
+    data: "grant_type=client_credentials&scope=urn:opc:resource:consumer::all"
   })
   .then(function (response) {
+    console.log(response)
     return {
       access_token: response.data.access_token,
       token_type: response.data.token_type
@@ -38,7 +40,7 @@ const Initial = (data) => {
     '- Acessar conta',
     '- Notícias da manhã',
     '- Solicitar abertura de conta'
-  ].join(" ")
+  ].join("\n")
 }
 
 const Account = async (data) => {
@@ -52,21 +54,34 @@ const Account = async (data) => {
 }
 
 const News = async (data) => {
-  const authorization = auth();
+  const authorization = await auth();
   const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=2020-07-09&toData=2020-07-14&playlist=morningCalls&channel=safra'
   const headers = {
-    "authorization": `${authorization.access_token} ${authorization.token_type}`,
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
     "cache-control": "no-cache",
     "content-type": "application/x-www-form-urlencoded",
   }
-
+  
   return await axios({
     method: 'get',
     url: url,
     headers
   })
   .then(function (response) {
-    return response.data
+    console.log(response.data.data)
+    const news = response.data.data.sort(function (a, b) {
+      if (a.data > b.data) {
+        return 1;
+      }
+      if (a.data < b.data) {
+        return -1;
+      }
+      return 0;
+    }).map(item => {
+
+      return item.description
+    });
+    return news
   })
   .catch(function (error) {
     console.log(`ERROR: ${error.message}`);
@@ -180,14 +195,16 @@ const ErrorHandler = {
   },
 };
 
-const skillBuilder = Alexa.SkillBuilders.custom();
+// const skillBuilder = Alexa.SkillBuilders.custom();
 
-exports.handler = skillBuilder
-  .addRequestHandlers(
-    GetHandler,
-    HelpIntentHandler,
-    CancelAndStopIntentHandler,
-    SessionEndedRequestHandler,
-  )
-  .addErrorHandlers(ErrorHandler)
-  .lambda();
+// exports.handler = skillBuilder
+//   .addRequestHandlers(
+//     GetHandler,
+//     HelpIntentHandler,
+//     CancelAndStopIntentHandler,
+//     SessionEndedRequestHandler,
+//   )
+//   .addErrorHandlers(ErrorHandler)
+//   .lambda();
+
+  News();
