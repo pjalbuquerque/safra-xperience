@@ -76,6 +76,7 @@ const GetHandler = {
     console.log(JSON.stringify(handlerInput))
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
       || (handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent 
       && (
           handlerInput.requestEnvelope.request.intent.name === 'AccountIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'NewsIntent' ||
