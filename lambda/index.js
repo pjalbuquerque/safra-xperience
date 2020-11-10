@@ -31,7 +31,7 @@ const auth = async () => {
 
 }
 
-const Initial = async (data) => {
+const Initial = (data) => {
 
   return [
     'O que você gostaria de fazer?',
