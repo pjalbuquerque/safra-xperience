@@ -4,7 +4,7 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 
-const auth async = () => {
+const auth = async () => {
   
   const url = "https://idcs-902a944ff6854c5fbe94750e48d66be5.identity.oraclecloud.com/oauth2/v1/token";
   const headers = {
