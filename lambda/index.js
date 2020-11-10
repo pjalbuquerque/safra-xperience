@@ -40,7 +40,7 @@ const Initial = (data) => {
     '- Acessar conta',
     '- Notícias da manhã',
     '- Solicitar abertura de conta'
-  ].join("\n")
+  ].join(" ")
 }
 
 const Account = async (data) => {
@@ -81,7 +81,7 @@ const News = async (data) => {
 
       return item.description
     });
-    return news
+    return news.join(" ")
   })
   .catch(function (error) {
     console.log(`ERROR: ${error.message}`);
