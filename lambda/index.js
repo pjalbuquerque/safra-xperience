@@ -77,7 +77,8 @@ const InitialIntent = {
   },
   handle(handlerInput) {
 
-    let outputSpeech = Initial();
+    const outputSpeech = Initial();
+    console.log(outputSpeech);
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
