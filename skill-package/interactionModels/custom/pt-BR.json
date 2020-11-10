@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "change me",
+      "invocationName": "safra online",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -16,12 +16,33 @@
           "samples": []
         },
         {
-          "name": "GetRemoteDataIntent",
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "InitialIntent",
+          "slots": [],
+          "samples": []
+        },
+        {
+          "name": "AccountIntent",
           "slots": [],
           "samples": [
-            "saldo da conta",
-            "valor da conta",
-            "teste da conta"
+            "acessar conta"
+          ]
+        },
+        {
+          "name": "NewsIntent",
+          "slots": [],
+          "samples": [
+            "noticias da manhã"
+          ]
+        },
+        {
+          "name": "NewAccountIntent",
+          "slots": [],
+          "samples": [
+            "solicitar abertura de conta"
           ]
         },
         {
@@ -30,10 +51,6 @@
           "samples": [
             "sair"
           ]
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
         }
       ],
       "types": []
