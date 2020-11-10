@@ -36,7 +36,7 @@ const Initial = (data) => {
   return [
     'O que você gostaria de fazer?',
     '- Acessar conta',
-    '- Noticias da manha',
+    '- Notícias da manhã',
     '- Solicitar abertura de conta'
   ].join(" ")
 }
@@ -52,13 +52,25 @@ const Account = async (data) => {
 }
 
 const News = async (data) => {
-  return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
-    .then(function (response) {
-      return response.data.payload
-    })
-    .catch(function (error) {
-      console.log(`ERROR: ${error.message}`);
-    });
+  const auth = auth();
+  const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=2020-07-09&toData=2020-07-14&playlist=morningCalls&channel=safra'
+  const headers = {
+    "authorization": `${auth.access_token} ${auth.token_type}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
 }
 
 const NewAccount = async (data) => {
