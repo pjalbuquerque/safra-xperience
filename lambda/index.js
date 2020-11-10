@@ -71,6 +71,65 @@ const NewAccountIntent = async (data) => {
     });
 }
 
+const InitialIntent = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
+  },
+  async handle(handlerInput) {
+
+    let outputSpeech = InitialIntent();
+
+    return handlerInput.responseBuilder
+      .speak(outputSpeech)
+      .reprompt(outputSpeech)
+      .getResponse();
+  },
+};
+const AccountIntent = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+    handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'
+  },
+  async handle(handlerInput) {
+
+    let outputSpeech = AccountIntent();
+
+    return handlerInput.responseBuilder
+      .speak(outputSpeech)
+      .reprompt(outputSpeech)
+      .getResponse();
+  },
+}; 
+const NewsIntent = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+    handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'
+  },
+  async handle(handlerInput) {
+
+    let outputSpeech = NewsIntent();
+
+    return handlerInput.responseBuilder
+      .speak(outputSpeech)
+      .reprompt(outputSpeech)
+      .getResponse();
+  },
+};
+const NewAccountIntent = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+    handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'
+  },
+  async handle(handlerInput) {
+
+    let outputSpeech = NewAccountIntent();
+
+    return handlerInput.responseBuilder
+      .speak(outputSpeech)
+      .reprompt(outputSpeech)
+      .getResponse();
+  },
+};
 const GetHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
