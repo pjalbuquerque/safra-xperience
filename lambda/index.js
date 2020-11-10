@@ -52,10 +52,10 @@ const Account = async (data) => {
 }
 
 const News = async (data) => {
-  const auth = auth();
+  const authorization = auth();
   const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=2020-07-09&toData=2020-07-14&playlist=morningCalls&channel=safra'
   const headers = {
-    "authorization": `${auth.access_token} ${auth.token_type}`,
+    "authorization": `${authorization.access_token} ${authorization.token_type}`,
     "cache-control": "no-cache",
     "content-type": "application/x-www-form-urlencoded",
   }
