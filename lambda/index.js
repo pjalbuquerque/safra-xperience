@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 
 const Alexa = require('ask-sdk-core');
+const axios = require('axios');
 
 const GetRemoteDataHandler = {
   canHandle(handlerInput) {
@@ -103,16 +104,14 @@ const ErrorHandler = {
 };
 
 const getRemoteData = (url, handlerInput) => new Promise((resolve, reject) => {
-  const client = url.startsWith('https') ? require('https') : require('http');
-  const request = client.get(url, handlerInput, (response) => {
-    if (response.statusCode < 200 || response.statusCode > 299) {
-      reject(new Error(`Failed with status code: ${response.statusCode}`));
-    }
-    const body = [];
-    response.on('data', (chunk) => body.push(chunk));
-    response.on('end', () => resolve(body.join('')));
+  axios.post(url, handlerInput)
+  .then(function (response) {
+    resolve(response.join(''))
+  })
+  .catch(function (error) {
+    reject(error)
   });
-  request.on('error', (err) => reject(err));
+
 });
 
 const skillBuilder = Alexa.SkillBuilders.custom();
