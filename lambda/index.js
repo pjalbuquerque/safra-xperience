@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable global-require */
 
-const Alexa = require('ask-sdk-core');
+// const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 
 const auth = async () => {
@@ -21,7 +21,6 @@ const auth = async () => {
     data: "grant_type=client_credentials&scope=urn:opc:resource:consumer::all"
   })
   .then(function (response) {
-    console.log(response)
     return {
       access_token: response.data.access_token,
       token_type: response.data.token_type
@@ -80,7 +79,6 @@ const News = async (data) => {
 
       return item.description
     });
-    console.log(news.join(" "))
     return news.join(" ")
   })
   .catch(function (error) {
@@ -89,18 +87,42 @@ const News = async (data) => {
 }
 
 const NewAccount = async (data) => {
-  return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
-    .then(function (response) {
-      return response.data.payload
-    })
-    .catch(function (error) {
-      console.log(`ERROR: ${error.message}`);
-    });
+
+  const nome = data.requestEnvelope.request.intent.slots.nome.value
+  const email = data.requestEnvelope.request.intent.slots.email.value
+  const telefone = data.requestEnvelope.request.intent.slots.telefone.value
+
+  const body = {
+    "Name": nome,
+    "Email": email,
+    "Phone": telefone
+  }
+  
+  const authorization = await auth();
+  const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/accounts/v1/optin'
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/json",
+  }
+  return await axios({
+    method: 'post',
+    url: url,
+    headers,
+    data: JSON.stringify(body)
+  })
+  .then(function (response) {
+    if(response.status == 201){
+      return "Solicitação de cadastro efetuada com sucesso!"
+    }
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
 }
 
 const GetHandler = {
   canHandle(handlerInput) {
-    console.log(JSON.stringify(handlerInput))
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
       || (handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent 
@@ -129,7 +151,7 @@ const GetHandler = {
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
-        outputSpeech = NewAccount();
+        outputSpeech = await NewAccount();
       }
     }
 
