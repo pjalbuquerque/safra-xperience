@@ -30,6 +30,17 @@
           "name": "Hello World Skill"
         }
       }
-    }
+    },
+    "permissions": [
+      {
+        "name": "alexa::profile:email:read"
+      },
+      {
+        "name": "alexa::profile:name:read"
+      },
+      {
+        "name": "alexa::profile:mobile_number:read"
+      }
+    ]
   }
 }

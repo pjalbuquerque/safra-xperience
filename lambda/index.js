@@ -4,6 +4,10 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 
+const FULL_NAME_PERMISSION = "alexa::profile:name:read";
+const EMAIL_PERMISSION = "alexa::profile:email:read";
+const MOBILE_PERMISSION = "alexa::profile:mobile_number:read";
+
 const auth = async () => {
   
   const url = "https://idcs-902a944ff6854c5fbe94750e48d66be5.identity.oraclecloud.com/oauth2/v1/token";
@@ -88,14 +92,16 @@ const News = async (data) => {
 
 const NewAccount = async (data) => {
 
-  const nome = data.requestEnvelope.request.intent.slots.nome.value
-  const email = data.requestEnvelope.request.intent.slots.email.value
-  const telefone = data.requestEnvelope.request.intent.slots.telefone.value
+  // const body = {
+  //   "Name": nome,
+  //   "Email": email,
+  //   "Phone": telefone
+  // }
 
   const body = {
-    "Name": nome,
-    "Email": email,
-    "Phone": telefone
+    "Name": "Robert Cecil Martin da Silva",
+    "Email":"robert.cecil@unclebobcleancode.com",
+    "Phone":"+5511922222222"
   }
   
   const authorization = await auth();
@@ -113,7 +119,10 @@ const NewAccount = async (data) => {
   })
   .then(function (response) {
     if(response.status == 201){
-      return "Solicitação de cadastro efetuada com sucesso!"
+      return [
+        "Solicitação de cadastro efetuada com sucesso!",
+        "Logo você irá receber nosso contato"
+      ].join(" ")
     }
   })
   .catch(function (error) {
