@@ -125,7 +125,7 @@ const GetHandler = {
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
-        outputSpeech = News();
+        outputSpeech = await News();
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
