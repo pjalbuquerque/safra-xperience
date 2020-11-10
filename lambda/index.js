@@ -16,7 +16,7 @@ const GetRemoteDataHandler = {
 
     await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
     .then(function (response) {
-      outputSpeech = response.payload
+      outputSpeech = response.data.payload
     })
     .catch(function (error) {
       console.log(`ERROR: ${error.message}`);
