@@ -31,7 +31,7 @@ const auth = async () => {
 
 }
 
-const InitialIntent = async (data) => {
+const Initial = async (data) => {
 
   return [
     'O que você gostaria de fazer?',
@@ -41,7 +41,7 @@ const InitialIntent = async (data) => {
   ].join(" ")
 }
 
-const AccountIntent = async (data) => {
+const Account = async (data) => {
   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       return response.data.payload
@@ -51,7 +51,7 @@ const AccountIntent = async (data) => {
     });
 }
 
-const NewsIntent = async (data) => {
+const News = async (data) => {
   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       return response.data.payload
@@ -61,7 +61,7 @@ const NewsIntent = async (data) => {
     });
 }
 
-const NewAccountIntent = async (data) => {
+const NewAccount = async (data) => {
   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
     .then(function (response) {
       return response.data.payload
@@ -77,7 +77,7 @@ const InitialIntent = {
   },
   async handle(handlerInput) {
 
-    let outputSpeech = InitialIntent();
+    let outputSpeech = Initial();
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
@@ -92,7 +92,7 @@ const AccountIntent = {
   },
   async handle(handlerInput) {
 
-    let outputSpeech = AccountIntent();
+    let outputSpeech = Account();
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
@@ -107,7 +107,7 @@ const NewsIntent = {
   },
   async handle(handlerInput) {
 
-    let outputSpeech = NewsIntent();
+    let outputSpeech = News();
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
@@ -122,7 +122,7 @@ const NewAccountIntent = {
   },
   async handle(handlerInput) {
 
-    let outputSpeech = NewAccountIntent();
+    let outputSpeech = NewAccount();
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
