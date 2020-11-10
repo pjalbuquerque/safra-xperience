@@ -73,8 +73,9 @@ const NewAccount = async (data) => {
 
 const InitialIntent = {
   canHandle(handlerInput) {
-    console.log(handlerInput)
-    return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
+    console.log(JSON.stringify(handlerInput))
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+    handlerInput.requestEnvelope.request.intent.name === 'InitialIntent'
   },
   handle(handlerInput) {
     console.log("Initial");
