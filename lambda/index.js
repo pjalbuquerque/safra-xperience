@@ -84,7 +84,23 @@ const GetHandler = {
   },
   async handle(handlerInput) {
 
-    const outputSpeech = this[handlerInput.requestEnvelope.request.intent.name](handlerInput);
+    let outputSpeech = ""
+
+    if(handlerInput.requestEnvelope.request.type === 'LaunchRequest'){
+      outputSpeech = InitialIntent();
+    }
+
+    if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
+      outputSpeech = AccountIntent();
+    }
+
+    if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
+      outputSpeech = NewsIntent();
+    }
+
+    if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
+      outputSpeech = NewAccountIntent();
+    }
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
