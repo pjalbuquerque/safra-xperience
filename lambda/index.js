@@ -4,7 +4,7 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 
-const auth = () => {
+const auth = async () => {
   
   const url = "https://idcs-902a944ff6854c5fbe94750e48d66be5.identity.oraclecloud.com/oauth2/v1/token";
   const headers = {
@@ -32,7 +32,7 @@ const auth = () => {
 
 }
 
-const InitialIntent = (data) => {
+const InitialIntent = async (data) => {
 
   return [
     'O que você gostaria de fazer?',
@@ -49,7 +49,7 @@ const InitialIntent = (data) => {
     });
 }
 
-const AccountIntent = (data) => {
+const AccountIntent = async (data) => {
   await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
     .then(function (response) {
       outputSpeech = response.data.payload
@@ -59,7 +59,7 @@ const AccountIntent = (data) => {
     });
 }
 
-const NewsIntent = (data) => {
+const NewsIntent = async (data) => {
   await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
     .then(function (response) {
       outputSpeech = response.data.payload
@@ -69,7 +69,7 @@ const NewsIntent = (data) => {
     });
 }
 
-const NewAccountIntent = (data) => {
+const NewAccountIntent = async (data) => {
   await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
     .then(function (response) {
       outputSpeech = response.data.payload
