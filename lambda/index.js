@@ -75,7 +75,7 @@ const InitialIntent = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
   },
-  async handle(handlerInput) {
+  handle(handlerInput) {
 
     let outputSpeech = Initial();
 
@@ -90,7 +90,7 @@ const AccountIntent = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
     handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'
   },
-  async handle(handlerInput) {
+  handle(handlerInput) {
 
     let outputSpeech = Account();
 
@@ -105,7 +105,7 @@ const NewsIntent = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
     handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'
   },
-  async handle(handlerInput) {
+  handle(handlerInput) {
 
     let outputSpeech = News();
 
@@ -120,7 +120,7 @@ const NewAccountIntent = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
     handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'
   },
-  async handle(handlerInput) {
+  handle(handlerInput) {
 
     let outputSpeech = NewAccount();
 
