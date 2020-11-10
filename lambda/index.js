@@ -14,29 +14,13 @@ const GetRemoteDataHandler = {
   async handle(handlerInput) {
     let outputSpeech = 'This is the default message.';
 
-    await getRemoteData('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
-      .then((response) => {
-        const data = JSON.parse(response);
-        outputSpeech = data.payload
-        // outputSpeech = `There are currently ${data.people.length} astronauts in space. `;
-        // for (let i = 0; i < data.people.length; i += 1) {
-        //   if (i === 0) {
-        //     // first record
-        //     outputSpeech = `${outputSpeech}Their names are: ${data.people[i].name}, `;
-        //   } else if (i === data.people.length - 1) {
-        //     // last record
-        //     outputSpeech = `${outputSpeech}and ${data.people[i].name}.`;
-        //   } else {
-        //     // middle record(s)
-        //     outputSpeech = `${outputSpeech + data.people[i].name}, `;
-        //   }
-        // }
-      })
-      .catch((err) => {
-        console.log(`ERROR: ${err.message}`);
-        // set an optional error message here
-        // outputSpeech = err.message;
-      });
+    await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', handlerInput)
+    .then(function (response) {
+      outputSpeech = response.payload
+    })
+    .catch(function (error) {
+      console.log(`ERROR: ${error.message}`);
+    });
 
     return handlerInput.responseBuilder
       .speak(outputSpeech)
@@ -102,17 +86,6 @@ const ErrorHandler = {
       .getResponse();
   },
 };
-
-const getRemoteData = (url, handlerInput) => new Promise((resolve, reject) => {
-  axios.post(url, handlerInput)
-  .then(function (response) {
-    resolve(response.join(''))
-  })
-  .catch(function (error) {
-    reject(error)
-  });
-
-});
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
