@@ -92,16 +92,18 @@ const GetHandler = {
       outputSpeech = Initial();
     }
 
-    if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
-      outputSpeech = Account();
-    }
-
-    if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
-      outputSpeech = News();
-    }
-
-    if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
-      outputSpeech = NewAccount();
+    if(handlerInput.requestEnvelope.request.intent){
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
+        outputSpeech = Account();
+      }
+  
+      if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
+        outputSpeech = News();
+      }
+  
+      if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
+        outputSpeech = NewAccount();
+      }
     }
 
     return handlerInput.responseBuilder
