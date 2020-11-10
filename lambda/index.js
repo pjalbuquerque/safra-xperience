@@ -71,71 +71,9 @@ const NewAccount = async (data) => {
     });
 }
 
-const InitialIntent = {
-  canHandle(handlerInput) {
-    console.log(JSON.stringify(handlerInput))
-    return handlerInput.requestEnvelope.request.type === 'LaunchRequest' ||
-    handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-    handlerInput.requestEnvelope.request.intent.name === 'InitialIntent'
-  },
-  handle(handlerInput) {
-    console.log("Initial");
-    const outputSpeech = Initial();
-    console.log(outputSpeech);
-
-    return handlerInput.responseBuilder
-      .speak(outputSpeech)
-      .reprompt(outputSpeech)
-      .getResponse();
-  },
-};
-const AccountIntent = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-    handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'
-  },
-  handle(handlerInput) {
-
-    let outputSpeech = Account();
-
-    return handlerInput.responseBuilder
-      .speak(outputSpeech)
-      .reprompt(outputSpeech)
-      .getResponse();
-  },
-}; 
-const NewsIntent = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-    handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'
-  },
-  handle(handlerInput) {
-
-    let outputSpeech = News();
-
-    return handlerInput.responseBuilder
-      .speak(outputSpeech)
-      .reprompt(outputSpeech)
-      .getResponse();
-  },
-};
-const NewAccountIntent = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-    handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'
-  },
-  handle(handlerInput) {
-
-    let outputSpeech = NewAccount();
-
-    return handlerInput.responseBuilder
-      .speak(outputSpeech)
-      .reprompt(outputSpeech)
-      .getResponse();
-  },
-};
 const GetHandler = {
   canHandle(handlerInput) {
+    console.log(JSON.stringify(handlerInput))
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
       || (handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && (
@@ -150,19 +88,19 @@ const GetHandler = {
     let outputSpeech = ""
 
     if(handlerInput.requestEnvelope.request.type === 'LaunchRequest'){
-      outputSpeech = InitialIntent();
+      outputSpeech = Initial();
     }
 
     if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
-      outputSpeech = AccountIntent();
+      outputSpeech = Account();
     }
 
     if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
-      outputSpeech = NewsIntent();
+      outputSpeech = News();
     }
 
     if(handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'){
-      outputSpeech = NewAccountIntent();
+      outputSpeech = NewAccount();
     }
 
     return handlerInput.responseBuilder
@@ -231,10 +169,7 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
   .addRequestHandlers(
-    InitialIntent,
-    AccountIntent,
-    NewsIntent,
-    NewAccountIntent,
+    GetHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
