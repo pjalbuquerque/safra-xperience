@@ -68,7 +68,6 @@ const News = async (data) => {
     headers
   })
   .then(function (response) {
-    console.log(response.data.data)
     const news = response.data.data.sort(function (a, b) {
       if (a.data > b.data) {
         return 1;
@@ -81,6 +80,7 @@ const News = async (data) => {
 
       return item.description
     });
+    console.log(news.join(" "))
     return news.join(" ")
   })
   .catch(function (error) {
