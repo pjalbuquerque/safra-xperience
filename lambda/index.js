@@ -62,10 +62,10 @@ const AccountToken = async (data) => {
 }
 
 
-const AccountInfo = async (data) => {
+const AccountInfo = async (conta) => {
     
   const authorization = await auth();
-  const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=2020-07-09&toData=2020-07-14&playlist=morningCalls&channel=safra'
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
   const headers = {
     "authorization": `${authorization.token_type} ${authorization.access_token}`,
     "cache-control": "no-cache",
