@@ -190,6 +190,8 @@ const GetHandler = {
             
             if(sessionAttributes.token == token){
                 outputSpeech = "Login efetuado";
+            } else {
+                outputSpeech = "Token inválido tente novamente";
             }
         }
         
