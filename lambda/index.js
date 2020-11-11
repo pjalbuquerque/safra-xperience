@@ -78,10 +78,8 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
-    console.log(response)
 
     const account = response.data.Data.Account[0]
-    console.log(account)
 
     const info = [
         `As informações da conta são:`,
@@ -90,7 +88,6 @@ const AccountInfo = async (conta) => {
         `Moeda da conta: ${account.Currency === 'BLR'? 'REAL': "ESTRANGEIRA"}`,
         `Dono da conta: ${account.Account.Name}`
     ]
-    console.log(info)
     
     return info.join(" ")
   })
