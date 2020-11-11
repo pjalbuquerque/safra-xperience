@@ -78,7 +78,7 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
-    const news = response.data
+    const account = response.data
 
     return news.join(" ")
   })
