@@ -46,6 +46,19 @@ const Initial = (data) => {
   ].join(" ")
 }
 
+const AccountToken = async (data) => {
+    
+    return "Foi enviado um token para seu telefone celular. Por favor informe o token"
+//   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
+//     .then(function (response) {
+//       return response.data.payload
+//     })
+//     .catch(function (error) {
+//       console.log(`ERROR: ${error.message}`);
+//     });
+}
+
+
 const Account = async (data) => {
     
     return "Foi enviado um token para seu telefone celular. Por favor informe o token"
@@ -154,7 +167,9 @@ const GetHandler = {
 
     if(handlerInput.requestEnvelope.request.intent){
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
-        outputSpeech = Account();
+          
+        await AccountToken();
+        outputSpeech = AccountToken();
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.conta = "1234";
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
