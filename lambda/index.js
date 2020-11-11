@@ -99,7 +99,7 @@ const AccountInfo = async (conta) => {
 const AccountBalanceIntent = async (conta) => {
     
   const authorization = await auth();
-  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}/balances`
   const headers = {
     "authorization": `${authorization.token_type} ${authorization.access_token}`,
     "cache-control": "no-cache",
