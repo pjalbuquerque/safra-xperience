@@ -49,7 +49,7 @@ const Initial = (data) => {
 const AccountToken = async (data) => {
     
     return {
-        token: 1234,
+        code: 1234,
         mensage: "Foi enviado um token para seu telefone celular. Por favor informe o token"
     }
 //   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
