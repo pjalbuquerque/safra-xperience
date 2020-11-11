@@ -96,7 +96,7 @@ const AccountInfo = async (conta) => {
   });
 }
 
-const AccountBalanceIntent = async (conta) => {
+const AccountBalance = async (conta) => {
     
   const authorization = await auth();
   const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}/balances`
@@ -126,7 +126,7 @@ const AccountBalanceIntent = async (conta) => {
   });
 }
 
-const AccountExtractIntent = async (conta) => {
+const AccountExtract = async (conta) => {
     
   const authorization = await auth();
   const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
@@ -160,7 +160,7 @@ const AccountExtractIntent = async (conta) => {
   });
 }
 
-const AccountTransferIntent = async (conta) => {
+const AccountTransfer = async (conta) => {
     
   const authorization = await auth();
   const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
@@ -256,7 +256,7 @@ const NewAccount = async (data) => {
     data: JSON.stringify(body)
   })
   .then(function (response) {
-    if(response.status == 201){
+    if(response.status === 201){
       return [
         "Solicitação de cadastro efetuada com sucesso!",
         "Logo você irá receber nosso contato"
@@ -327,6 +327,33 @@ const GetHandler = {
           const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
           if(sessionAttributes.login){
             outputSpeech = await AccountInfo(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountBalanceIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountBalance(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountExtractIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountBalance(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountTransferIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountBalance(sessionAttributes.conta);
           } else {
             outputSpeech = "Você precisa efetuar o login em sua conta"
           }
