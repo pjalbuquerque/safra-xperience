@@ -200,7 +200,7 @@ const GetHandler = {
       }
       
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
-        outputSpeech = await News();
+        outputSpeech = "Informações da conta"
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
