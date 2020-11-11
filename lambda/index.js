@@ -85,7 +85,7 @@ const AccountInfo = async (conta) => {
         `As informações da conta são:`,
         `Número da conta: ${account.AccountId}`,
         `Apelido da conta: ${account.Nickname}`,
-        `Moeda da conta: ${account.Currency === 'BLR'? 'REAL': "ESTRANGEIRA"}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
         `Dono da conta: ${account.Account.Name}`
     ]
     
