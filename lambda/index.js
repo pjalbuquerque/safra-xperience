@@ -71,7 +71,7 @@ const AccountInfo = async (conta) => {
     "cache-control": "no-cache",
     "content-type": "application/x-www-form-urlencoded",
   }
-  
+  console.log(url)
   return await axios({
     method: 'get',
     url: url,
