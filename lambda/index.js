@@ -344,7 +344,7 @@ const GetHandler = {
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountExtractIntent'){
           const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
           if(sessionAttributes.login){
-            outputSpeech = await AccountBalance(sessionAttributes.conta);
+            outputSpeech = await AccountExtract(sessionAttributes.conta);
           } else {
             outputSpeech = "Você precisa efetuar o login em sua conta"
           }
@@ -353,7 +353,7 @@ const GetHandler = {
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountTransferIntent'){
           const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
           if(sessionAttributes.login){
-            outputSpeech = await AccountBalance(sessionAttributes.conta);
+            outputSpeech = await AccountTransfer(sessionAttributes.conta);
           } else {
             outputSpeech = "Você precisa efetuar o login em sua conta"
           }
