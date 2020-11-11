@@ -80,7 +80,7 @@ const AccountInfo = async (conta) => {
   .then(function (response) {
     const account = response.data
 
-    return news.join(" ")
+    return account.join(" ")
   })
   .catch(function (error) {
     console.log(`ERROR: ${error.message}`);
