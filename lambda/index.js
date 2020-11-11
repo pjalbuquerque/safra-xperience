@@ -155,6 +155,9 @@ const GetHandler = {
     if(handlerInput.requestEnvelope.request.intent){
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
         outputSpeech = Account();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.conta = "1234";
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
