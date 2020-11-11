@@ -78,6 +78,7 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
+      console.log(response)
 
     const account = response.data.Data.Account[0]
 
