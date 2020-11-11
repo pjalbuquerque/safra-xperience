@@ -63,7 +63,6 @@ const AccountToken = async (data) => {
 
 
 const AccountInfo = async (conta) => {
-    console.log(conta)
     
   const authorization = await auth();
   const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
@@ -79,7 +78,7 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
-      console.log(response)
+
     const account = response.data.Data.Account[0]
 
     const info = [
@@ -229,7 +228,6 @@ const GetHandler = {
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
           const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
           if(sessionAttributes.login){
-              console.log(sessionAttributes)
             outputSpeech = AccountInfo(sessionAttributes.conta);
           } else {
             outputSpeech = "Você precisa efetuar o login em sua conta"
