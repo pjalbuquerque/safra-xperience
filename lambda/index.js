@@ -88,7 +88,7 @@ const AccountInfo = async (conta) => {
         `Dono da conta: ${account.Account.Name}`
     ]
     
-    return `As informações da conta s`
+    return info.join(" ")
   })
   .catch(function (error) {
     console.log(`ERROR: ${error.message}`);
