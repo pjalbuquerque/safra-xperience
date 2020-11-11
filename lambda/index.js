@@ -171,13 +171,28 @@ const GetHandler = {
     if(handlerInput.requestEnvelope.request.intent){
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
           
-        const token = await AccountToken();
-        outputSpeech = token.message;
+        const conta = handlerInput.requestEnvelope.request.intent.slots.conta.value
         
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.token = token.code;
-        sessionAttributes.conta = conta;
-        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        if(conta){
+            
+            const token = await AccountToken();
+            outputSpeech = token.message;
+            
+            const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            sessionAttributes.token = token.code;
+            sessionAttributes.conta = conta;
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        } else {
+            
+            const token = handlerInput.requestEnvelope.request.intent.slots.token.value
+            
+            const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            
+            if(sessionAttributes.token == token){
+                outputSpeech = "Login efetuado";
+            }
+        }
+        
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
