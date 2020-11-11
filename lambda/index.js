@@ -47,13 +47,15 @@ const Initial = (data) => {
 }
 
 const Account = async (data) => {
-  return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
-    .then(function (response) {
-      return response.data.payload
-    })
-    .catch(function (error) {
-      console.log(`ERROR: ${error.message}`);
-    });
+  console.log(JSON.stringify(data))
+  // return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
+  //   .then(function (response) {
+  //     return response.data.payload
+  //   })
+  //   .catch(function (error) {
+  //     console.log(`ERROR: ${error.message}`);
+  //   });
+  return "teste"
 }
 
 const News = async (data) => {
