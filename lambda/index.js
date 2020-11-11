@@ -78,18 +78,8 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
-    const news = response.data.data.sort(function (a, b) {
-      if (a.data > b.data) {
-        return 1;
-      }
-      if (a.data < b.data) {
-        return -1;
-      }
-      return 0;
-    }).map(item => {
+    const news = response.data
 
-      return item.description
-    });
     return news.join(" ")
   })
   .catch(function (error) {
