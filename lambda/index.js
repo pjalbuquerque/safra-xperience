@@ -113,14 +113,10 @@ const AccountBalanceIntent = async (conta) => {
   })
   .then(function (response) {
 
-    const account = response.data.Data.Account[0]
+    const balance = response.data.Data.Balance[0]
 
     const info = [
-        `As informações da conta são:`,
-        `Número da conta: ${account.AccountId}`,
-        `Apelido da conta: ${account.Nickname}`,
-        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
-        `Dono da conta: ${account.Account.Name}`
+        `O saldo atual da conta é R$ ${balance.Amount}`,
     ]
     
     return info.join(" ")
