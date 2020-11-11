@@ -78,7 +78,7 @@ const AccountInfo = async (conta) => {
     headers
   })
   .then(function (response) {
-    const account = response.data
+    const account = response.data.Data.Account[0]
 
     return account.join(" ")
   })
