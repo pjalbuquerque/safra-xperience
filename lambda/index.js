@@ -50,7 +50,7 @@ const AccountToken = async (data) => {
     
     return {
         code: 1234,
-        mensage: "Foi enviado um token para seu telefone celular. Por favor informe o token"
+        message: "Foi enviado um token para seu telefone celular. Por favor informe o token"
     }
 //   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
 //     .then(function (response) {
