@@ -229,6 +229,7 @@ const GetHandler = {
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
           const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
           if(sessionAttributes.login){
+              console.log(sessionAttributes)
             outputSpeech = AccountInfo(sessionAttributes.conta);
           } else {
             outputSpeech = "Você precisa efetuar o login em sua conta"
