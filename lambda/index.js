@@ -116,7 +116,7 @@ const AccountBalance = async (conta) => {
     const balance = response.data.Data.Balance[0]
 
     const info = [
-        `O saldo atual da conta é ${balance.Amount.Amount} R$`,
+        `O saldo atual da conta é ${balance.Amount.Amount} reais`,
     ]
     
     return info.join(" ")
