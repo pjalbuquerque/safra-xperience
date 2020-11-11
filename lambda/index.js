@@ -46,16 +46,152 @@ const Initial = (data) => {
   ].join(" ")
 }
 
-const Account = async (data) => {
-  console.log(JSON.stringify(data))
-  // return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
-  //   .then(function (response) {
-  //     return response.data.payload
-  //   })
-  //   .catch(function (error) {
-  //     console.log(`ERROR: ${error.message}`);
-  //   });
-  return "teste"
+const AccountToken = async (data) => {
+    
+    return {
+        code: 1234,
+        message: "Foi enviado um token para seu telefone celular. Por favor informe o token"
+    }
+//   return await axios.post('http://ec2-54-159-213-8.compute-1.amazonaws.com:1880/alexa', data)
+//     .then(function (response) {
+//       return response.data.payload
+//     })
+//     .catch(function (error) {
+//       console.log(`ERROR: ${error.message}`);
+//     });
+}
+
+
+const AccountInfo = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
+const AccountBalance = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}/balances`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const balance = response.data.Data.Balance[0]
+
+    const info = [
+        `O saldo atual da conta é ${balance.Amount.Amount} reais`,
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
+const AccountExtract = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
+const AccountTransfer = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
 }
 
 const News = async (data) => {
@@ -120,7 +256,7 @@ const NewAccount = async (data) => {
     data: JSON.stringify(body)
   })
   .then(function (response) {
-    if(response.status == 201){
+    if(response.status === 201){
       return [
         "Solicitação de cadastro efetuada com sucesso!",
         "Logo você irá receber nosso contato"
@@ -139,6 +275,10 @@ const GetHandler = {
       && handlerInput.requestEnvelope.request.intent 
       && (
           handlerInput.requestEnvelope.request.intent.name === 'AccountIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountBalanceIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountExtractIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountTransferIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'NewsIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'
         )
@@ -154,7 +294,69 @@ const GetHandler = {
 
     if(handlerInput.requestEnvelope.request.intent){
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
-        outputSpeech = Account();
+          
+        const conta = handlerInput.requestEnvelope.request.intent.slots.conta.value
+        
+        if(conta){
+            
+            const token = await AccountToken();
+            outputSpeech = token.message;
+            
+            const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            sessionAttributes.token = token.code;
+            sessionAttributes.conta = conta;
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        } else {
+            
+            const token = handlerInput.requestEnvelope.request.intent.slots.token.value
+            
+            const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            
+            if(sessionAttributes.token == token){
+                sessionAttributes.login = true;
+                handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+                outputSpeech = "Login efetuado";
+            } else {
+                outputSpeech = "Token inválido tente novamente";
+            }
+        }
+        
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountInfo(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountBalanceIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountBalance(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountExtractIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountExtract(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
+      }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountTransferIntent'){
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = await AccountTransfer(sessionAttributes.conta);
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
