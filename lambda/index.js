@@ -189,6 +189,8 @@ const GetHandler = {
             const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
             
             if(sessionAttributes.token == token){
+                sessionAttributes.login = true;
+                handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
                 outputSpeech = "Login efetuado";
             } else {
                 outputSpeech = "Token inválido tente novamente";
