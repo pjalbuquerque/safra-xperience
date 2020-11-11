@@ -198,6 +198,10 @@ const GetHandler = {
         }
         
       }
+      
+      if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
+        outputSpeech = await News();
+      }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
         outputSpeech = await News();
