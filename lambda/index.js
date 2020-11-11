@@ -177,6 +177,9 @@ const GetHandler = {
       && (
           handlerInput.requestEnvelope.request.intent.name === 'AccountIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountBalanceIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountExtractIntent' ||
+          handlerInput.requestEnvelope.request.intent.name === 'AccountTransferIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'NewsIntent' ||
           handlerInput.requestEnvelope.request.intent.name === 'NewAccountIntent'
         )
