@@ -96,6 +96,108 @@ const AccountInfo = async (conta) => {
   });
 }
 
+const AccountBalanceIntent = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
+const AccountExtractIntent = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
+const AccountTransferIntent = async (conta) => {
+    
+  const authorization = await auth();
+  const url = `https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/${conta}`
+  const headers = {
+    "authorization": `${authorization.token_type} ${authorization.access_token}`,
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+  }
+
+  return await axios({
+    method: 'get',
+    url: url,
+    headers
+  })
+  .then(function (response) {
+
+    const account = response.data.Data.Account[0]
+
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency === 'BRL'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return info.join(" ")
+  })
+  .catch(function (error) {
+    console.log(`ERROR: ${error.message}`);
+  });
+}
+
 const News = async (data) => {
   const authorization = await auth();
   const url = 'https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=2020-07-09&toData=2020-07-14&playlist=morningCalls&channel=safra'
