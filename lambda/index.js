@@ -172,9 +172,11 @@ const GetHandler = {
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountIntent'){
           
         const token = await AccountToken();
-        sessionAttributes.token = token.code;
         outputSpeech = token.message;
+        
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.token = token.code;
+        sessionAttributes.conta = conta;
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
       }
   
