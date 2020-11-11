@@ -80,7 +80,15 @@ const AccountInfo = async (conta) => {
   .then(function (response) {
     const account = response.data.Data.Account[0]
 
-    return account.join(" ")
+    const info = [
+        `As informações da conta são:`,
+        `Número da conta: ${account.AccountId}`,
+        `Apelido da conta: ${account.Nickname}`,
+        `Moeda da conta: ${account.Currency == 'BLR'? 'REAL': "ESTRANGEIRA"}`,
+        `Dono da conta: ${account.Account.Name}`
+    ]
+    
+    return `As informações da conta s`
   })
   .catch(function (error) {
     console.log(`ERROR: ${error.message}`);
