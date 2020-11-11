@@ -200,7 +200,12 @@ const GetHandler = {
       }
       
       if(handlerInput.requestEnvelope.request.intent.name === 'AccountInfoIntent'){
-        outputSpeech = "Informações da conta"
+          const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          if(sessionAttributes.login){
+            outputSpeech = "Informações da conta"
+          } else {
+            outputSpeech = "Você precisa efetuar o login em sua conta"
+          }
       }
   
       if(handlerInput.requestEnvelope.request.intent.name === 'NewsIntent'){
