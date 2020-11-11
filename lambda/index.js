@@ -173,7 +173,7 @@ const GetHandler = {
           
         const token = await AccountToken();
         sessionAttributes.token = token.code;
-        outputSpeech = token.code;
+        outputSpeech = token.message;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
       }
