@@ -37,8 +37,6 @@ const auth = async () => {
 }
 
 const Initial = (data) => {
-    
-    return "Olá Paulo, para acessar seu Safra experience, por favor, me confirme sua chave de acesso";
 
   return [
     'O que você gostaria de fazer?',

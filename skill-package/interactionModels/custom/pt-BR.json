@@ -1,60 +1,101 @@
 {
   "interactionModel": {
-    "languageModel": {
-      "invocationName": "safra online",
-      "intents": [
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
-        },
-        {
-          "name": "InitialIntent",
-          "slots": [],
-          "samples": []
-        },
-        {
-          "name": "AccountIntent",
-          "slots": [],
-          "samples": [
-            "acessar conta"
-          ]
-        },
-        {
-          "name": "NewsIntent",
-          "slots": [],
-          "samples": [
-            "noticias da manhã"
-          ]
-        },
-        {
-          "name": "NewAccountIntent",
-          "slots": [],
-          "samples": [
-            "solicitar abertura de conta"
-          ]
-        },
-        {
-          "name": "CancelAndStopIntentHandler",
-          "slots": [],
-          "samples": [
-            "sair"
-          ]
-        }
-      ],
-      "types": []
-    }
-  },
-  "version": "1"
+      "languageModel": {
+          "invocationName": "safra xperience",
+          "intents": [
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.NavigateHomeIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AccountIntent",
+                  "slots": [
+                      {
+                          "name": "conta",
+                          "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                          "name": "token",
+                          "type": "AMAZON.NUMBER"
+                      }
+                  ],
+                  "samples": [
+                      "{token}",
+                      "acessar conta {conta}"
+                  ]
+              },
+              {
+                  "name": "NewsIntent",
+                  "slots": [],
+                  "samples": [
+                      "noticias da manhã"
+                  ]
+              },
+              {
+                  "name": "NewAccountIntent",
+                  "slots": [],
+                  "samples": [
+                      "solicitar abertura de conta"
+                  ]
+              },
+              {
+                  "name": "CancelAndStopIntentHandler",
+                  "slots": [],
+                  "samples": [
+                      "sair"
+                  ]
+              },
+              {
+                  "name": "AccountInfoIntent",
+                  "slots": [],
+                  "samples": [
+                      "informações da conta"
+                  ]
+              },
+              {
+                  "name": "AccountBalanceIntent",
+                  "slots": [],
+                  "samples": [
+                      "saldo da conta"
+                  ]
+              },
+              {
+                  "name": "AccountExtractIntent",
+                  "slots": [],
+                  "samples": [
+                      "extrato da conta"
+                  ]
+              },
+              {
+                  "name": "AccountTransferIntent",
+                  "slots": [
+                      {
+                          "name": "valor",
+                          "type": "AMAZON.NUMBER"
+                      },
+                      {
+                          "name": "recipient",
+                          "type": "AMAZON.NUMBER"
+                      }
+                  ],
+                  "samples": [
+                      "transferir {valor} reais para {recipient}"
+                  ]
+              }
+          ],
+          "types": []
+      }
+  }
 }
